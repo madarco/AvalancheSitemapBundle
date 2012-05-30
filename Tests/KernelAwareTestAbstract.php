@@ -51,12 +51,6 @@ abstract class KernelAwareTestAbstract extends \PHPUnit_Framework_TestCase
     {
         $this->kernel = new \AppKernel('test', true);
         $this->kernel->boot();
-
-        //$this->_application = new \Symfony\Bundle\FrameworkBundle\Console\Application($kernel);
-        //$this->_application->setAutoExit(false);
-        //$this->runConsole("doctrine:mongodb:fixtures:load ");
-        
-        
         
         $this->container = $this->kernel->getContainer();
 
@@ -91,14 +85,6 @@ abstract class KernelAwareTestAbstract extends \PHPUnit_Framework_TestCase
 
         $executor->execute($fixtures);
         $this->referenceRepository = $executor->getReferenceRepository();
-    }
-    
-    protected function runConsole($command, Array $options = array())
-    {
-    	$options["-e"] = "test";
-    	$options["-q"] = null;
-    	$options = array_merge($options, array('command' => $command));
-    	return $this->_application->run(new \Symfony\Component\Console\Input\ArrayInput($options));
     }
     
     /**

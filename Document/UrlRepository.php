@@ -69,8 +69,19 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
         $this->cleanup();
     }
 
-    public function getLastmod($page)
+    public function getLastmod($page = null)
     {
+    	$q = $this->createQueryBuilder();
+    	$q->sort('lastmod', 'desc');
+    	$q->limit(1);
+    	if($page) {
+    		$q->skip(UrlRepositoryInterface::PER_PAGE_LIMIT * ($page - 1));
+    	}
+    	$url = $q->getQuery()->execute()->getSingleResult();
+    	
+    	if($url) {
+    		return $url->getLastmod();
+    	}
     }
 
     private function scheduleForCleanup(Url $url)

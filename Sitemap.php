@@ -56,7 +56,7 @@ class Sitemap
         $this->repository->flush();
     }
 
-    public function lastmod($page)
+    public function lastmod($page = null)
     {
         return $this->repository->getLastmod($page);
     }

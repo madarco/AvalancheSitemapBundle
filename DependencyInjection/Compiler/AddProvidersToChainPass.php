@@ -13,7 +13,7 @@ class AddProvidersToChainPass implements CompilerPassInterface
         $chain = $container->getDefinition('sitemap.provider.chain');
 
         foreach ($container->findTaggedServiceIds('sitemap.provider') as $id => $tag) {
-            $chain->addMethodCall('add', array(new Reference($id)));
+            $chain->addMethodCall('add', array($id, new Reference($id)));
         }
     }
 }
