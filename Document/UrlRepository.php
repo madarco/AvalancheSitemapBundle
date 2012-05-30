@@ -9,10 +9,11 @@ use Avalanche\Bundle\SitemapBundle\Sitemap\UrlRepositoryInterface;
 class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
 {
     private $urlsToRemove = array();
+    private $urlsToPersist = array();
 
     public function add(Url $url)
     {
-        $this->dm->persist($url);
+    		$this->scheduleForPersist($url);
         $this->scheduleForCleanup($url);
     }
 
@@ -48,6 +49,22 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
 
     public function flush()
     {
+    		foreach($this->urlsToPersist as $url) {
+    			$q = $this->createQueryBuilder();
+    			
+				  // Find the Url
+				  $q->findAndUpdate()
+				    		->field('loc')->equals($url->getLoc());
+				    			
+				  // Update found Url
+				  $q->update()->upsert(true)
+			    			->field('lastmod')->set($url->getLastmod())
+			    			->field('changefreq')->set($url->getChangefreq())
+			    			->field('priority')->set($url->getPriority());
+			    			//->field('images')->set($url->all());
+    			
+	    		$q->getQuery()->execute();
+    		}
         $this->dm->flush();
         $this->cleanup();
     }
@@ -59,6 +76,11 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
     private function scheduleForCleanup(Url $url)
     {
         $this->urlsToRemove[] = $url;
+    }
+    
+    private function scheduleForPersist(Url $url)
+    {
+    	$this->urlsToPersist[] = $url;
     }
 
     private function cleanup()
