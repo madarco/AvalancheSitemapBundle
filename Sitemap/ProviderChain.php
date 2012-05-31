@@ -37,7 +37,7 @@ class ProviderChain implements Provider
         				$duration = time() - $time;
         				echo "Page run in {$duration}s : $serviceId - $page: " . $process->getOutput() . " - " . $process->getErrorOutput() . "\n";
         				echo "Waiting 15 seconds...";
-        				sleep(15);
+        				sleep(25);
         			}
         		}
         		else {
