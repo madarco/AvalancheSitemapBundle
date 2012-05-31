@@ -32,9 +32,12 @@ class ProviderChain implements Provider
         			foreach($pages as $page) {
         				$time = time();
         				$process = new Process($this->rootDir . '/console sitemap:generate --service "' . $serviceId . '" --page ' . $page);
+        				$process->setTimeout(60*5);
         				$process->run();
         				$duration = time() - $time;
         				echo "Page run in {$duration}s : $serviceId - $page: " . $process->getOutput() . " - " . $process->getErrorOutput() . "\n";
+        				echo "Waiting 15 seconds...";
+        				sleep(15);
         			}
         		}
         		else {
