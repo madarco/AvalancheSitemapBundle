@@ -44,7 +44,7 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
 
     public function pages()
     {
-        return max(ceil(count($this->findAll()) / UrlRepositoryInterface::PER_PAGE_LIMIT), 1);
+        return max(ceil($this->findAll()->count() / UrlRepositoryInterface::PER_PAGE_LIMIT), 1);
     }
 
     public function flush()
