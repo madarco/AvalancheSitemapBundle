@@ -60,7 +60,8 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
 				  $q->update()->upsert(true)
 			    			->field('lastmod')->set($url->getLastmod())
 			    			->field('changefreq')->set($url->getChangefreq())
-			    			->field('priority')->set($url->getPriority());
+			    			->field('priority')->set($url->getPriority())
+				  			->field('provider')->set($url->getProvider());
 			    			//->field('images')->set($url->all());
     			
 	    		$q->getQuery()->execute();

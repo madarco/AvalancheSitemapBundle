@@ -43,6 +43,7 @@ class ProviderChain implements Provider
         			}
         		}
         		else {
+        			$sitemap->setServiceId($serviceId);
         			$provider->populate($sitemap);
         		}
         }
