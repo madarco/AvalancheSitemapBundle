@@ -25,6 +25,7 @@ class ProviderChain implements Provider
     public function populate(Sitemap $sitemap)
     {
         foreach ($this->providers as $serviceId => $provider) {
+        		$sitemap->setServiceId($serviceId);
         		if($provider instanceof PagingProvider) {
         			//Run each page on a different process to avoid memory leaks issues:
         			$pages = $provider->getPages($sitemap);
@@ -43,7 +44,6 @@ class ProviderChain implements Provider
         			}
         		}
         		else {
-        			$sitemap->setServiceId($serviceId);
         			$provider->populate($sitemap);
         		}
         }

@@ -26,6 +26,7 @@ class GenerateCommand extends ContainerAwareCommand
 
         if($input->getOption('service')) {
         	$sitemapCmd = $this->getContainer()->get($input->getOption('service'));
+        	$sitemap->setServiceId($input->getOption('service'));
         	$sitemapCmd->populatePage($sitemap, $input->getOption('page'));
         }
         else {
