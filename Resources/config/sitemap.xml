@@ -12,6 +12,7 @@
         <parameter key="sitemap.mongodb.database">sitemap</parameter>
         <parameter key="sitemap.twig.extension.class">Avalanche\Bundle\SitemapBundle\Templating\SitemapExtension</parameter>
         <parameter key="sitemap.provider.chain.class">Avalanche\Bundle\SitemapBundle\Sitemap\ProviderChain</parameter>
+        <parameter key="sitemap.wait_beetween_iterations">25</parameter>
     </parameters>
 
     <services>
@@ -46,6 +47,7 @@
 -->
         <service id="sitemap.provider.chain" class="%sitemap.provider.chain.class%" >
         	<argument>%kernel.root_dir%</argument>
+        	<argument>%sitemap.wait_beetween_iterations%</argument>
         </service>
     </services>
 </container>

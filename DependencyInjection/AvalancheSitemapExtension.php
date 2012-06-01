@@ -33,5 +33,9 @@ class AvalancheSitemapExtension extends Extension
         if(isset($config['base_url'])) {
             $container->setParameter('sitemap.base_url', $config['base_url']);
         }
+        
+        if(isset($config['wait_beetween_iterations'])) {
+        	$container->setParameter('sitemap.wait_beetween_iterations', $config['wait_beetween_iterations']);
+        }
     }
 }
