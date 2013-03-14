@@ -13,15 +13,17 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
 
     public function add(Url $url)
     {
-    		$this->scheduleForPersist($url);
+    	$this->scheduleForPersist($url);
         $this->scheduleForCleanup($url);
     }
 
     public function findAllOnPage($page)
     {
         return $this->createQueryBuilder()
+        	//->sort('lastmod', 'desc')
             ->skip(UrlRepositoryInterface::PER_PAGE_LIMIT * ($page - 1))
             ->limit(UrlRepositoryInterface::PER_PAGE_LIMIT)
+            
             ->hydrate(false)
             ->getQuery()
             ->execute();
@@ -72,17 +74,7 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
 
     public function getLastmod($page = null)
     {
-    	$q = $this->createQueryBuilder();
-    	$q->sort('lastmod', 'desc');
-    	$q->limit(1);
-    	if($page) {
-    		$q->skip(UrlRepositoryInterface::PER_PAGE_LIMIT * ($page - 1));
-    	}
-    	$url = $q->getQuery()->execute()->getSingleResult();
-    	
-    	if($url) {
-    		return $url->getLastmod();
-    	}
+    	return new \DateTime(); //It can't find if an url was deleted from a page, so we need to reupdate them.
     }
 
     private function scheduleForCleanup(Url $url)
