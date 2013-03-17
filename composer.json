@@ -1,5 +1,6 @@
 {
     "name": "avalance/sitemap-bundle",
+    "type": "symfony-bundle",
     "description": "Sitemap generator bundle",
     "license": "MIT",
     "authors": [
