@@ -13,6 +13,6 @@
     },
     "target-dir": "Avalance/Bundle/SitemapBundle",
     "autoload": {
-        "psr-0": {"Avalance\\Bundle\\SitemapBundle": "Avalance/Bundle/SitemapBundle"}
+        "psr-0": {"Avalance\\Bundle\\SitemapBundle": ""}
     }
 }
