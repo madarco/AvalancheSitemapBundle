@@ -1,5 +1,5 @@
 {
-    "name": "avalance/sitemap-bundle",
+    "name": "avalanche/sitemap-bundle",
     "type": "symfony-bundle",
     "description": "Sitemap generator bundle",
     "license": "MIT",
@@ -7,13 +7,16 @@
         {
             "name": "Marco D'Alia",
             "email": "github@madarco.it"
+        },
+	{
+	    "name": "Avalanche"
         }
     ],
     "require": {
 
     },
-    "target-dir": "Avalance/Bundle/SitemapBundle",
+    "target-dir": "Avalanche/Bundle/SitemapBundle",
     "autoload": {
-        "psr-0": {"Avalance\\Bundle\\SitemapBundle": ""}
+        "psr-0": {"Avalanche\\Bundle\\SitemapBundle": ""}
     }
 }
