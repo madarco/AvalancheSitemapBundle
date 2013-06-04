@@ -17,6 +17,8 @@ Avalanche\Bundle\SitemapBundle\Sitemap\Url:
             type: string
         priority:
             type: string
+        provider:
+            type: string
     embedMany:
         images:
             targetDocument: Avalanche\Bundle\SitemapBundle\Sitemap\Url\Image

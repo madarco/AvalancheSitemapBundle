@@ -1,0 +1,9 @@
+{% extends 'SonataAdminBundle:CRUD:base_list_field.html.twig' %}
+
+{% block field %}
+{% spaceless %}
+
+    <a href="{{ object.loc }}">{{ object.loc }}</a>
+
+{% endspaceless %}
+{% endblock %}

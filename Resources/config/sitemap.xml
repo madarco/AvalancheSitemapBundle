@@ -49,5 +49,18 @@
         	<argument>%kernel.root_dir%</argument>
         	<argument>%sitemap.wait_beetween_iterations%</argument>
         </service>
+
+
+
+        <service id="longtale.sitemapbundle.admin.sitemap" class="Avalanche\Bundle\SitemapBundle\Admin\SitemapAdmin">
+            <tag name="sonata.admin" manager_type="doctrine_mongodb" group="Sitemap" label="Url"/>
+            <argument />
+            <argument>Avalanche\Bundle\SitemapBundle\Sitemap\Url</argument>
+            <argument>SonataAdminBundle:CRUD</argument>
+            <call method="setTranslationDomain">
+                <argument>LtListingAdmin</argument>
+            </call>
+
+        </service>
     </services>
 </container>

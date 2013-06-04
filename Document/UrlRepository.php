@@ -51,24 +51,29 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
 
     public function flush()
     {
-    		foreach($this->urlsToPersist as $url) {
-    			$q = $this->createQueryBuilder();
-    			
-				  // Find the Url
-				  $q->findAndUpdate()
-				    		->field('loc')->equals($url->getLoc());
-				    			
-				  // Update found Url
-				  $q->update()->upsert(true)
-			    			->field('lastmod')->set($url->getLastmod())
-			    			->field('changefreq')->set($url->getChangefreq())
-			    			->field('priority')->set($url->getPriority())
-				  			->field('provider')->set($url->getProvider());
-			    			//->field('images')->set($url->all());
-    			
-	    		$q->getQuery()->execute();
-    		}
+        foreach($this->urlsToPersist as $url) {
+            $q = $this->createQueryBuilder();
+
+              // Find the Url
+              $q->findAndUpdate()
+                        ->field('loc')->equals($url->getLoc());
+
+              // Update found Url
+              $q->update()->upsert(true)
+                        ->field('lastmod')->set($url->getLastmod())
+                        ->field('changefreq')->set($url->getChangefreq())
+                        ->field('priority')->set($url->getPriority())
+                        ->field('provider')->set($url->getProvider());
+                        //->field('images')->set($url->all());
+
+            $q->getQuery()->execute();
+        }
+
+        foreach ($this->urlsToRemove as $url) {
+            $this->dm->detach($url);
+        }
         $this->dm->flush();
+
         $this->cleanup();
     }
 
@@ -89,9 +94,7 @@ class UrlRepository extends DocumentRepository implements UrlRepositoryInterface
 
     private function cleanup()
     {
-        foreach ($this->urlsToRemove as $url) {
-            $this->dm->detach($url);
-        }
         $this->urlsToRemove = array();
+        $this->urlsToPersist = array();
     }
 }
