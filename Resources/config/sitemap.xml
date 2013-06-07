@@ -48,6 +48,7 @@
         <service id="sitemap.provider.chain" class="%sitemap.provider.chain.class%" >
         	<argument>%kernel.root_dir%</argument>
         	<argument>%sitemap.wait_beetween_iterations%</argument>
+            <argument type="service" id="kernel"></argument>
         </service>
 
 

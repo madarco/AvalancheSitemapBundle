@@ -11,10 +11,12 @@ class ProviderChain implements Provider
     private $rootDir;
     private $waitBeetweenIterations;
     private $providers = array();
+    private $environment;
 
-    public function __construct($rootDir, $waitBeetweenIterations = 15) {
+    public function __construct($rootDir, $waitBeetweenIterations = 15, $kernel) {
     	$this->rootDir = $rootDir;
     	$this->waitBeetweenIterations = $waitBeetweenIterations;
+        $this->environment = $kernel->getEnvironment();
     }
     
     public function add($id, /* Provider or PagingProvider */ $provider)
@@ -24,6 +26,7 @@ class ProviderChain implements Provider
 
     public function populate(Sitemap $sitemap)
     {
+
         foreach ($this->providers as $serviceId => $provider) {
             $sitemap->setServiceId($serviceId);
             if($provider instanceof PagingProvider) {
@@ -34,7 +37,7 @@ class ProviderChain implements Provider
 
                 foreach($pages as $page) {
                     $time = time();
-                    $process = new Process($this->rootDir . '/console sitemap:generate --service "' . $serviceId . '" --page ' . $page);
+                    $process = new Process($this->rootDir . '/console sitemap:generate --env="'.$this->environment.'" --service "' . $serviceId . '" --page ' . $page);
                     $process->setTimeout(60*60);
                     $process->run();
                     $duration = time() - $time;
