@@ -15,7 +15,7 @@ class Sitemap {
 	}
 
 	public function add(Url $url) {
-		if($this->serviceId) {
+		if($this->serviceId && !$url->getProvider()) {
 			$url->setProvider($this->serviceId);
 		}
 		$this->repository->add($url);
