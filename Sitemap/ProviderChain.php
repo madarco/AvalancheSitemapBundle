@@ -24,10 +24,17 @@ class ProviderChain implements Provider
         $this->providers[$id] = $provider;
     }
 
-    public function populate(Sitemap $sitemap)
+    public function populate(Sitemap $sitemap, $singleServiceId = null)
     {
 
-        foreach ($this->providers as $serviceId => $provider) {
+        if($singleServiceId) {
+            $providers = array($singleServiceId => $this->providers[$singleServiceId]);
+        }
+        else {
+            $providers = $this->providers;
+        }
+
+        foreach ($providers as $serviceId => $provider) {
             $sitemap->setServiceId($serviceId);
             if($provider instanceof PagingProvider) {
                 //Run each page on a different process to avoid memory leaks issues:
