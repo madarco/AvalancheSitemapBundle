@@ -1,13 +1,6 @@
 <?php
 namespace Avalanche\Bundle\SitemapBundle\Admin;
 
-use Longtale\ListingBundle\Common\Manager\GraphManager;
-use Longtale\ListingBundle\Common\Manager\Search;
-
-use Longtale\LibBundle\Exporter\MongoExportAdmin;
-
-use Longtale\LibBundle\Exporter\MongoDbSourceIterator;
-
 use Exporter\Source\DoctrineORMQuerySourceIterator;
 
 use Doctrine\ODM\MongoDB\DocumentManager;
@@ -24,7 +17,7 @@ use Longtale\ListingBundle\Common\Manager\BroadcastManager;
 
 use SaadTazi\GChartBundle\DataTable;
 
-class SitemapAdmin extends MongoExportAdmin {
+class SitemapAdmin extends Admin {
 
     protected $baseRouteName = 'sitemap_url_min';
     protected $baseRoutePattern = '/longtale/sitemap/url';
