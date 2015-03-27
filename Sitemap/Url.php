@@ -71,7 +71,11 @@ class Url implements Locatable {
 	public function remove(Image $image) {
 		$this->images->removeElement($image);
 	}
-
+        
+        public function getImages(){
+                return $this->images; 
+        }
+        
 	public function all() {
 		return $this->images;
 	}
